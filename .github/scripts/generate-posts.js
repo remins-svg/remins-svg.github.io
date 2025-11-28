@@ -17,7 +17,10 @@ const files = fs
 
 const posts = files.map((filename) => {
   const filePath = path.join(postsDir, filename);
-  const content = fs.readFileSync(filePath, 'utf8');
+  let content = fs.readFileSync(filePath, 'utf8');
+
+  // Windows 줄바꿈 정규화 (\r\n -> \n)
+  content = content.replace(/\r\n/g, '\n');
 
   // Front Matter 파싱
   const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);

@@ -8,23 +8,62 @@
    * posts.json에서 게시글 목록 로드
    */
   async function loadPosts() {
+    const listEl = document.getElementById('posts-list');
+    const noPostsEl = document.getElementById('no-posts');
+    
+    // 로딩 상태 표시
+    if (listEl) {
+      listEl.innerHTML = '<li class="post-item"><p style="text-align: center; padding: 2rem; color: var(--color-text-muted);">게시글을 불러오는 중...</p></li>';
+    }
+    
     try {
       const response = await fetch('posts.json');
       if (!response.ok) {
-        throw new Error('posts.json을 찾을 수 없습니다');
+        throw new Error('posts.json을 찾을 수 없습니다 (HTTP ' + response.status + ')');
       }
-      allPosts = await response.json();
+      
+      const data = await response.json();
+      
+      if (!Array.isArray(data)) {
+        throw new Error('posts.json 형식이 올바르지 않습니다');
+      }
+      
+      allPosts = data;
+      
+      console.log('게시글 로드 성공:', allPosts.length + '개');
       
       // 검색 모듈에 데이터 전달
       if (window.BlogSearch) {
         window.BlogSearch.setPosts(allPosts);
+      } else {
+        console.warn('BlogSearch 모듈이 아직 로드되지 않았습니다');
       }
 
       renderPosts(allPosts);
       renderTags(allPosts);
     } catch (error) {
       console.error('게시글 로드 실패:', error);
-      showNoPosts();
+      console.error('에러 상세:', error.message);
+      
+      // 에러 메시지 표시
+      if (listEl) {
+        listEl.innerHTML = `
+          <li class="post-item">
+            <p style="text-align: center; padding: 2rem; color: var(--color-text-muted);">
+              게시글을 불러올 수 없습니다.<br>
+              <small style="font-size: 0.875rem; margin-top: 0.5rem; display: block;">
+                ${error.message}<br>
+                로컬 서버를 사용하고 있는지 확인하세요.
+              </small>
+            </p>
+          </li>
+        `;
+      }
+      
+      if (noPostsEl) {
+        noPostsEl.style.display = 'block';
+        noPostsEl.textContent = '게시글을 불러올 수 없습니다: ' + error.message;
+      }
     }
   }
 
@@ -156,10 +195,17 @@
 
   // 검색 결과 이벤트 리스너
   document.addEventListener('postsFiltered', function (e) {
-    renderPosts(e.detail.posts);
+    if (e.detail && e.detail.posts) {
+      renderPosts(e.detail.posts);
+    }
   });
 
   // DOM 로드 후 초기화
-  document.addEventListener('DOMContentLoaded', loadPosts);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadPosts);
+  } else {
+    // DOM이 이미 로드된 경우 즉시 실행
+    loadPosts();
+  }
 })();
 

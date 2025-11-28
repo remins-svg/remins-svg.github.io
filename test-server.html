@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로컬 서버 테스트</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .success { color: green; }
+    .error { color: red; }
+    .info { background: #f0f0f0; padding: 15px; border-radius: 5px; margin: 20px 0; }
+    code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>로컬 서버 테스트</h1>
+  
+  <div id="status" class="info">
+    <p>테스트 중...</p>
+  </div>
+
+  <div id="instructions" style="display: none;">
+    <h2>로컬 서버 실행 방법</h2>
+    <h3>방법 1: Python 사용 (권장)</h3>
+    <p>터미널에서 다음 명령어를 실행하세요:</p>
+    <pre><code>python -m http.server 8000</code></pre>
+    <p>그 다음 브라우저에서 <code>http://localhost:8000</code>으로 접속하세요.</p>
+
+    <h3>방법 2: Node.js 사용</h3>
+    <p>터미널에서 다음 명령어를 실행하세요:</p>
+    <pre><code>npx http-server -p 8000</code></pre>
+    <p>그 다음 브라우저에서 <code>http://localhost:8000</code>으로 접속하세요.</p>
+
+    <h3>방법 3: VS Code 사용</h3>
+    <p>VS Code에서 "Live Server" 확장을 설치하고, <code>index.html</code>을 우클릭 → "Open with Live Server"를 선택하세요.</p>
+  </div>
+
+  <script>
+    async function testPostsJson() {
+      const statusEl = document.getElementById('status');
+      const instructionsEl = document.getElementById('instructions');
+      
+      try {
+        const response = await fetch('posts.json');
+        
+        if (!response.ok) {
+          throw new Error('HTTP ' + response.status);
+        }
+        
+        const data = await response.json();
+        
+        if (Array.isArray(data) && data.length > 0) {
+          statusEl.innerHTML = `
+            <p class="success">✅ 성공! posts.json을 불러왔습니다.</p>
+            <p>게시글 개수: <strong>${data.length}개</strong></p>
+            <ul>
+              ${data.map(post => `<li>${post.title}</li>`).join('')}
+            </ul>
+            <p><a href="index.html">블로그 메인 페이지로 이동</a></p>
+          `;
+          statusEl.className = 'info';
+        } else {
+          throw new Error('posts.json이 비어있거나 형식이 올바르지 않습니다');
+        }
+      } catch (error) {
+        statusEl.innerHTML = `
+          <p class="error">❌ 오류: posts.json을 불러올 수 없습니다.</p>
+          <p><strong>에러 메시지:</strong> ${error.message}</p>
+          <p><strong>원인:</strong> 로컬 서버를 사용하지 않고 파일을 직접 열었을 가능성이 높습니다.</p>
+        `;
+        statusEl.className = 'info';
+        instructionsEl.style.display = 'block';
+      }
+    }
+
+    // 페이지 로드 시 테스트 실행
+    testPostsJson();
+  </script>
+</body>
+</html>
+
