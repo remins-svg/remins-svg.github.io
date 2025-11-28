@@ -1,6 +1,6 @@
 ---
 title: '첫 번째 게시글 - 블로그에 오신 것을 환영합니다!'
-date: 2025-01-26
+date: 2025-11-28
 tags: ['블로그', 'GitHub Pages', 'Markdown']
 category: '소개'
 description: 'GitHub Pages로 만든 첫 번째 블로그 게시글입니다.'
