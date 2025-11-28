@@ -1,0 +1,222 @@
+/* ===== Prism.js 커스텀 테마 (다크/라이트 모드 지원) ===== */
+
+/* 공통 스타일 */
+code[class*="language-"],
+pre[class*="language-"] {
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, Monaco, 'Andale Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  tab-size: 2;
+  hyphens: none;
+}
+
+pre[class*="language-"] {
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  overflow: auto;
+  border-radius: 12px;
+}
+
+:not(pre) > code[class*="language-"] {
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  white-space: normal;
+}
+
+/* ===== 라이트 모드 ===== */
+:root code[class*="language-"],
+:root pre[class*="language-"] {
+  color: #1a1a2e;
+  background: #f5f5f8;
+}
+
+:root .token.comment,
+:root .token.prolog,
+:root .token.doctype,
+:root .token.cdata {
+  color: #6a737d;
+  font-style: italic;
+}
+
+:root .token.punctuation {
+  color: #24292e;
+}
+
+:root .token.namespace {
+  opacity: 0.7;
+}
+
+:root .token.property,
+:root .token.tag,
+:root .token.boolean,
+:root .token.number,
+:root .token.constant,
+:root .token.symbol,
+:root .token.deleted {
+  color: #d73a49;
+}
+
+:root .token.selector,
+:root .token.attr-name,
+:root .token.string,
+:root .token.char,
+:root .token.builtin,
+:root .token.inserted {
+  color: #22863a;
+}
+
+:root .token.operator,
+:root .token.entity,
+:root .token.url,
+:root .language-css .token.string,
+:root .style .token.string {
+  color: #005cc5;
+}
+
+:root .token.atrule,
+:root .token.attr-value,
+:root .token.keyword {
+  color: #d73a49;
+}
+
+:root .token.function,
+:root .token.class-name {
+  color: #6f42c1;
+}
+
+:root .token.regex,
+:root .token.important,
+:root .token.variable {
+  color: #e36209;
+}
+
+:root .token.important,
+:root .token.bold {
+  font-weight: bold;
+}
+
+:root .token.italic {
+  font-style: italic;
+}
+
+:root .token.entity {
+  cursor: help;
+}
+
+/* ===== 다크 모드 ===== */
+[data-theme="dark"] code[class*="language-"],
+[data-theme="dark"] pre[class*="language-"] {
+  color: #e8e8f0;
+  background: #1e1e32;
+}
+
+[data-theme="dark"] .token.comment,
+[data-theme="dark"] .token.prolog,
+[data-theme="dark"] .token.doctype,
+[data-theme="dark"] .token.cdata {
+  color: #6a6a88;
+  font-style: italic;
+}
+
+[data-theme="dark"] .token.punctuation {
+  color: #b8b8d0;
+}
+
+[data-theme="dark"] .token.namespace {
+  opacity: 0.7;
+}
+
+[data-theme="dark"] .token.property,
+[data-theme="dark"] .token.tag,
+[data-theme="dark"] .token.boolean,
+[data-theme="dark"] .token.number,
+[data-theme="dark"] .token.constant,
+[data-theme="dark"] .token.symbol,
+[data-theme="dark"] .token.deleted {
+  color: #f97583;
+}
+
+[data-theme="dark"] .token.selector,
+[data-theme="dark"] .token.attr-name,
+[data-theme="dark"] .token.string,
+[data-theme="dark"] .token.char,
+[data-theme="dark"] .token.builtin,
+[data-theme="dark"] .token.inserted {
+  color: #85e89d;
+}
+
+[data-theme="dark"] .token.operator,
+[data-theme="dark"] .token.entity,
+[data-theme="dark"] .token.url,
+[data-theme="dark"] .language-css .token.string,
+[data-theme="dark"] .style .token.string {
+  color: #79b8ff;
+}
+
+[data-theme="dark"] .token.atrule,
+[data-theme="dark"] .token.attr-value,
+[data-theme="dark"] .token.keyword {
+  color: #f97583;
+}
+
+[data-theme="dark"] .token.function,
+[data-theme="dark"] .token.class-name {
+  color: #b392f0;
+}
+
+[data-theme="dark"] .token.regex,
+[data-theme="dark"] .token.important,
+[data-theme="dark"] .token.variable {
+  color: #ffab70;
+}
+
+/* ===== 라인 하이라이팅 ===== */
+pre[class*="language-"].line-numbers {
+  position: relative;
+  padding-left: 3.5rem;
+  counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+  position: relative;
+  white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 1.25rem;
+  left: 0;
+  width: 3rem;
+  font-size: 100%;
+  letter-spacing: -1px;
+  border-right: 1px solid var(--color-border);
+  user-select: none;
+}
+
+.line-numbers-rows > span {
+  display: block;
+  counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  color: var(--color-text-muted);
+  display: block;
+  padding-right: 0.75rem;
+  text-align: right;
+}
+
+/* ===== 선택 영역 ===== */
+code[class*="language-"]::selection,
+pre[class*="language-"]::selection,
+code[class*="language-"] *::selection,
+pre[class*="language-"] *::selection {
+  background: rgba(99, 102, 241, 0.3);
+}
+

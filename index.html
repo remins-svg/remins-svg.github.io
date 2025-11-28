@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>remins-svg's Blog</title>
+  <meta name="description" content="개발 블로그">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/prism.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">remins-svg</a>
+      <nav class="nav">
+        <button id="theme-toggle" class="theme-toggle" aria-label="테마 전환">
+          <span class="icon-sun">☀️</span>
+          <span class="icon-moon">🌙</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main container">
+    <section class="search-section">
+      <input 
+        type="text" 
+        id="search-input" 
+        class="search-input" 
+        placeholder="게시글 검색..."
+        aria-label="게시글 검색"
+      >
+    </section>
+
+    <section class="tags-section" id="tags-container">
+      <!-- 태그들이 JavaScript로 동적 생성됩니다 -->
+    </section>
+
+    <section class="posts-section">
+      <ul id="posts-list" class="posts-list">
+        <!-- 게시글 목록이 JavaScript로 동적 생성됩니다 -->
+      </ul>
+      <p id="no-posts" class="no-posts" style="display: none;">
+        게시글을 찾을 수 없습니다.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 remins-svg. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+

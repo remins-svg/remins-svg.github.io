@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 - remins-svg's Blog</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/prism.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">remins-svg</a>
+      <nav class="nav">
+        <button id="theme-toggle" class="theme-toggle" aria-label="테마 전환">
+          <span class="icon-sun">☀️</span>
+          <span class="icon-moon">🌙</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main container">
+    <article class="post">
+      <header class="post-header">
+        <a href="/" class="back-link">← 목록으로</a>
+        <h1 id="post-title" class="post-title">로딩 중...</h1>
+        <div class="post-meta">
+          <time id="post-date" class="post-date"></time>
+          <span id="post-category" class="post-category"></span>
+        </div>
+        <div id="post-tags" class="post-tags">
+          <!-- 태그가 JavaScript로 동적 생성됩니다 -->
+        </div>
+      </header>
+
+      <div id="post-content" class="post-content">
+        <!-- 마크다운 내용이 JavaScript로 렌더링됩니다 -->
+        <p class="loading">게시글을 불러오는 중...</p>
+      </div>
+    </article>
+
+    <section id="comments" class="comments">
+      <!-- Giscus 댓글이 여기에 로드됩니다 -->
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 remins-svg. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- marked.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Prism.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  
+  <script src="js/theme.js"></script>
+  <script src="js/post-loader.js"></script>
+</body>
+</html>
+
